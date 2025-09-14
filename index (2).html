@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancer Care Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    header {
+      width: 100%;
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    main {
+      margin: 30px 0;
+      width: 90%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    p {
+      color: #34495e;
+      margin-bottom: 10px;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    input:hover, select:hover {
+      border-color: #3498db;
+    }
+    button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+      transform: scale(1.05);
+    }
+    .workflow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .step {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 10px;
+      width: 180px;
+      text-align: center;
+      font-weight: bold;
+      position: relative;
+      animation: fadeIn 1s ease forwards;
+      transition: transform 0.3s;
+    }
+    .step:hover {
+      transform: scale(1.1);
+      background: #c8e6f9;
+    }
+    .step:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 40px;
+      height: 4px;
+      background: #3498db;
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+    .step:last-child:before {
+      display: none;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .ai-analyze {
+      position: relative;
+      overflow: hidden;
+      height: 30px;
+      background: #f0f4f8;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .ai-bar {
+      height: 100%;
+      width: 0;
+      background: #3498db;
+      border-radius: 8px;
+      animation: loading 3s forwards;
+    }
+    @keyframes loading {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      background: #2c3e50;
+      color: #fff;
+      width: 100%;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🌏 Cancer Care Access Worldwide</header>
+
+  <main>
+    <!-- Registration & Login -->
+    <div class="card">
+      <h2>👤 Register / Login</h2>
+      <img src="home.jpg" alt="Register/Login">
+      <input type="text" placeholder="Full Name">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button>Register / Login</button>
+    </div>
+
+    <!-- User Data & AI Analysis -->
+    <div class="card">
+      <h2>🧠 Medical Data & AI Analysis</h2>
+      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Medical Report">
+      <select>
+        <option value="">Select Cancer Type</option>
+        <option value="breast">Breast Cancer</option>
+        <option value="lung">Lung Cancer</option>
+        <option value="blood">Blood Cancer</option>
+        <option value="skin">Skin Cancer</option>
+      </select>
+      <input type="file">
+      <button>Analyze Report</button>
+      <p>AI Analysis: Your medical report is being analyzed... 🤖</p>
+      <div class="ai-analyze">
+        <div class="ai-bar"></div>
+      </div>
+    </div>
+
+    <!-- Hospital Search -->
+    <div class="card">
+      <h2>🏥 Find Best Hospitals</h2>
+      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Hospital">
+      <input type="text" placeholder="Enter Location">
+      <button>Search Hospitals</button>
+      <p>Top hospitals for your cancer type will appear here. 🔍</p>
+    </div>
+
+    <!-- Connect with Doctor -->
+    <div class="card">
+      <h2>👩‍⚕️ Connect with Doctor</h2>
+      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Doctor">
+      <input type="text" placeholder="Choose Doctor">
+      <button>Connect Now</button>
+      <p>You can schedule a video call or chat with your doctor. 📞</p>
+    </div>
+
+    <!-- User Approval -->
+    <div class="card">
+      <h2>✅ User Approval</h2>
+      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Approval">
+      <p>Confirm your plan:</p>
+      <button>Approve Treatment Plan</button>
+    </div>
+
+    <!-- Workflow Animation -->
+    <div class="card workflow">
+      <div class="step">👤 Register/Login</div>
+      <div class="step">🧠 AI Analysis</div>
+      <div class="step">🏥 Hospital Search</div>
+      <div class="step">👩‍⚕️ Doctor Connect</div>
+      <div class="step">✅ User Approval</div>
+    </div>
+  </main>
+
+  <footer>© 2025 Cancer Care Access Worldwide</footer>
+
+</body>
+</html>
