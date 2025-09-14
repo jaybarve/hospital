@@ -1,240 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cancer Care Access</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Cancer Care Registration Workflow</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
     body {
-      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
     }
-    header {
-      width: 100%;
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      font-size: 26px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    main {
-      margin: 30px 0;
+    form {
+      max-width: 500px;
       width: 90%;
-      max-width: 1000px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-    .card {
       background: #fff;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 24px;
+      border-radius: 10px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
     h2 {
-      color: #2c3e50;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    p {
-      color: #34495e;
-      margin-bottom: 10px;
-    }
-    input, select, button {
-      padding: 10px;
-      margin: 5px 0;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    input:hover, select:hover {
-      border-color: #3498db;
-    }
-    button {
-      background-color: #3498db;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background-color: #2980b9;
-      transform: scale(1.05);
-    }
-    .workflow {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
+      color: #3157a9;
+      margin-bottom: 12px;
+      font-weight: 600;
     }
     .step {
-      background: #e3f2fd;
-      padding: 20px;
-      border-radius: 10px;
-      width: 180px;
-      text-align: center;
-      font-weight: bold;
-      position: relative;
-      animation: fadeIn 1s ease forwards;
-      transition: transform 0.3s;
-    }
-    .step:hover {
-      transform: scale(1.1);
-      background: #c8e6f9;
-    }
-    .step:before {
-      content: '';
       position: absolute;
-      top: 50%;
-      left: 100%;
-      width: 40px;
-      height: 4px;
-      background: #3498db;
-      transform: translateY(-50%);
-      z-index: -1;
-    }
-    .step:last-child:before {
-      display: none;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    .ai-analyze {
-      position: relative;
-      overflow: hidden;
-      height: 30px;
-      background: #f0f4f8;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    .ai-bar {
-      height: 100%;
-      width: 0;
-      background: #3498db;
-      border-radius: 8px;
-      animation: loading 3s forwards;
-    }
-    @keyframes loading {
-      0% { width: 0; }
-      100% { width: 100%; }
-    }
-
-    footer {
-      margin-top: 50px;
-      padding: 20px;
-      background: #2c3e50;
-      color: #fff;
       width: 100%;
-      text-align: center;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+      filter: blur(4px);
+    }
+    .step.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+      filter: blur(0);
+      animation: fadeIn 0.8s ease forwards;
+    }
+    input, select, textarea {
+      width: 100%;
+      margin: 10px 0 20px 0;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #4287f5;
+      outline: none;
+      box-shadow: 0 0 8px rgba(66, 135, 245, 0.4);
+    }
+    button {
+      background: #4287f5;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      margin-right: 10px;
+      user-select: none;
+    }
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+    #aiResult, #savedMsg {
+      margin-top: 12px;
+      color: green;
+      font-weight: 600;
+      min-height: 24px;
     }
 
-    img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin-bottom: 10px;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
     }
+
   </style>
 </head>
 <body>
-
-  <header>🌏 Cancer Care Access Worldwide</header>
-
-  <main>
-    <!-- Registration & Login -->
-    <div class="card">
-      <h2>👤 Register / Login</h2>
-      <img src="home.jpg" alt="Register/Login">
-      <input type="text" placeholder="Full Name">
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password">
-      <button>Register / Login</button>
+  <form id="cancerForm" autocomplete="off">
+    <!-- Step 1: Register -->
+    <div class="step active" id="step1">
+      <h2>Register</h2>
+      <input type="text" placeholder="Patient Name" required />
+      <input type="email" placeholder="Email" required />
+      <button type="button" onclick="nextStep(1)">Next</button>
     </div>
-
-    <!-- User Data & AI Analysis -->
-    <div class="card">
-      <h2>🧠 Medical Data & AI Analysis</h2>
-      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Medical Report">
-      <select>
-        <option value="">Select Cancer Type</option>
-        <option value="breast">Breast Cancer</option>
-        <option value="lung">Lung Cancer</option>
-        <option value="blood">Blood Cancer</option>
-        <option value="skin">Skin Cancer</option>
+    <!-- Step 2: AI Analysis -->
+    <div class="step" id="step2">
+      <h2>AI-Powered Cancer Type Analysis</h2>
+      <textarea id="analysisInput" placeholder="Enter medical data"></textarea>
+      <button type="button" onclick="runAIAnalysis()">Analyze</button>
+      <div id="aiResult"></div>
+      <button type="button" onclick="nextStep(2)">Next</button>
+    </div>
+    <!-- Step 3: Search for Care -->
+    <div class="step" id="step3">
+      <h2>Search for Care Options</h2>
+      <select id="careOptions">
+        <option>Oncology Center</option>
+        <option>Multi-specialty Hospital</option>
+        <option>Cancer Research Hospital</option>
       </select>
-      <input type="file">
-      <button>Analyze Report</button>
-      <p>AI Analysis: Your medical report is being analyzed... 🤖</p>
-      <div class="ai-analyze">
-        <div class="ai-bar"></div>
-      </div>
+      <button type="button" onclick="nextStep(3)">Next</button>
     </div>
-
-    <!-- Hospital Search -->
-    <div class="card">
-      <h2>🏥 Find Best Hospitals</h2>
-      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Hospital">
-      <input type="text" placeholder="Enter Location">
-      <button>Search Hospitals</button>
-      <p>Top hospitals for your cancer type will appear here. 🔍</p>
+    <!-- Step 4: Select Hospital -->
+    <div class="step" id="step4">
+      <h2>Select Hospital</h2>
+      <select id="hospitalSelect">
+        <option>Hospital A</option>
+        <option>Hospital B</option>
+        <option>Hospital C</option>
+      </select>
+      <button type="button" onclick="nextStep(4)">Next</button>
     </div>
-
-    <!-- Connect with Doctor -->
-    <div class="card">
-      <h2>👩‍⚕️ Connect with Doctor</h2>
-      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Doctor">
-      <input type="text" placeholder="Choose Doctor">
-      <button>Connect Now</button>
-      <p>You can schedule a video call or chat with your doctor. 📞</p>
+    <!-- Step 5: Save & Second Opinion -->
+    <div class="step" id="step5">
+      <h2>Save & Request Second Opinion</h2>
+      <button type="button" onclick="saveRequest()">Save & Request</button>
+      <div id="savedMsg"></div>
+      <button type="button" onclick="nextStep(5)">Next</button>
     </div>
-
-    <!-- User Approval -->
-    <div class="card">
-      <h2>✅ User Approval</h2>
-      <img src="https://images.unsplash.com/photo-1588776814546-ec16d3df96e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg" alt="Approval">
-      <p>Confirm your plan:</p>
-      <button>Approve Treatment Plan</button>
+    <!-- Step 6: Connect Patient & Doctor -->
+    <div class="step" id="step6">
+      <h2>Connecting Patient & Doctor</h2>
+      <div>Website Live Chat: <a href="#">Start Consultation</a></div>
+      <button type="button" onclick="nextStep(6)">Next</button>
     </div>
-
-    <!-- Workflow Animation -->
-    <div class="card workflow">
-      <div class="step">👤 Register/Login</div>
-      <div class="step">🧠 AI Analysis</div>
-      <div class="step">🏥 Hospital Search</div>
-      <div class="step">👩‍⚕️ Doctor Connect</div>
-      <div class="step">✅ User Approval</div>
+    <!-- Step 7: Patient Confirmation -->
+    <div class="step" id="step7">
+      <h2>Patient Confirmation to Continue</h2>
+      <button type="submit">Confirm & Finish</button>
     </div>
-  </main>
+  </form>
 
-  <footer>© 2025 Cancer Care Access Worldwide</footer>
+  <script>
+    let currentStep = 1;
+    const steps = document.querySelectorAll(".step");
 
+    document.addEventListener("DOMContentLoaded", () => showStep(currentStep));
+
+    function showStep(n) {
+      steps.forEach((step, i) => {
+        if(i === n - 1) {
+          step.classList.add("active");
+        } else {
+          step.classList.remove("active");
+        }
+      });
+    }
+
+    function nextStep(n) {
+      currentStep = n + 1;
+      showStep(currentStep);
+    }
+
+    function runAIAnalysis() {
+      const userInput = document.getElementById("analysisInput").value.trim();
+      const result =
+        userInput.length > 10
+          ? "Possible tumor detected: Recommend specialist evaluation."
+          : "Insufficient data. Please provide more detail.";
+      document.getElementById("aiResult").innerText = result;
+    }
+
+    function saveRequest() {
+      document.getElementById("savedMsg").innerText = "Hospital saved & second opinion requested!";
+    }
+
+    document.getElementById("cancerForm").onsubmit = function (e) {
+      e.preventDefault();
+      alert("Patient confirmed to continue. Workflow complete!");
+    };
+  </script>
 </body>
 </html>
